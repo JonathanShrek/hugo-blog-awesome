@@ -80,6 +80,9 @@
           fill: none;
           stroke: $dark-white;
         }
+        @include media-query($on-mobile) {
+          padding-top: 1rem;
+        }
       }
     }
 
@@ -87,6 +90,7 @@
       float: right;
       display: flex;
       align-items: center;
+      padding-right: 1rem;
     }
 
     .menu-trigger {
@@ -95,6 +99,7 @@
 
     .menu-icon {
       display: none;
+      padding-right: 1rem;
     }
 
     li {
