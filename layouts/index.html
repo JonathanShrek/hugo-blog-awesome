@@ -18,20 +18,38 @@
     <div class="wrapper">
         {{ partial "bio" . }}
         <main aria-label="Content">
-            <h3 class="posts-item-note" aria-label="Recent Posts">{{ T "home.recent_posts" }}</h3>
-            {{/* Show last 5 posts in reverse date order */}}
-            {{ $pagesToShow := where .Site.RegularPages "Type" "in" site.Params.mainSections }}
-            {{ $posts := $pagesToShow.ByDate.Reverse }}
-            {{ range first 5 $posts }}
-            {{ partial "postCard" . }}
-            {{ end }}
-            {{ if gt (len $posts) 5 }}
-            <p>
-                {{ range $firstSection := (where .Site.Sections "Section" "in" (first 1 (.Site.Params.mainSections))) }}
-                <a href="{{ $firstSection.Permalink }}">{{ T "home.see_all_posts" }}</a>
+            <div style="margin-bottom: 3rem;">
+                <h3 class="posts-item-note" aria-label="Recent Posts">{{ T "home.recent_posts" }}</h3>
+                {{/* Show last 5 posts in reverse date order */}}
+                {{ $pagesToShow := where .Site.RegularPages "Type" "in" site.Params.mainSections }}
+                {{ $posts := $pagesToShow.ByDate.Reverse }}
+                {{ range first 5 $posts }}
+                    {{ partial "postCard" . }}
                 {{ end }}
-            </p>
-            {{ end }}
+                {{ if gt (len $posts) 5 }}
+                <p>
+                    {{ range $firstSection := (where .Site.Sections "Section" "in" (first 1 (.Site.Params.mainSections))) }}
+                    <a href="{{ $firstSection.Permalink }}">{{ T "home.see_all_posts" }}</a>
+                    {{ end }}
+                </p>
+                {{ end }}
+            </div>
+            <div>
+                <h3 class="posts-item-note" aria-label="Recent Recipes">{{ T "home.recent_recipes" }}</h3>
+                {{/* Show last 5 recipes in reverse date order */}}
+                {{ $pagesToShow := where .Site.RegularPages "Type" "in" (slice "recipes") }}
+                {{ $recipes := $pagesToShow.ByDate.Reverse }}
+                {{ range first 5 $recipes }}
+                    {{ partial "postCard" . }}
+                {{ end }}
+                {{ if gt (len $recipes) 5 }}
+                    <p>
+                        {{ range $firstSection := (where .Site.Sections "Section" "in" (first 1 (.Site.Params.mainSections))) }}
+                        <a href="{{ $firstSection.Permalink }}">{{ T "home.see_all_posts" }}</a>
+                        {{ end }}
+                    </p>
+                {{ end }}
+            </div>
         </main>
     </div>
     {{- partial "footer.html" . -}}
