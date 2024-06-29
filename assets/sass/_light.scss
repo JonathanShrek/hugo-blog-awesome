@@ -1,0 +1,303 @@
+// Define your light mode variables
+$light-text-base-color: #333;  // Example light text color
+$light-white: #fff;            // Example light background color
+$light-gray: #ccc;             // Example light gray color
+$light-link-blue: #007bff;     // Example light link color
+$light-link-blue-active: #0056b3;  // Example light link active color
+$light-smoke: #f8f9fa;         // Example light smoke color
+$light-blockquote-text: #6c757d;  // Example light blockquote text color
+$light-bloquote-border: #ced4da;  // Example light blockquote border color
+$light-go-top-bg: #007bff;     // Example light "Go to top" background color
+$light-go-top-bg-hover: #0056b3;  // Example light "Go to top" hover background color
+$light-inline-code-text: #333; // Example light inline code text color
+$light-inline-code-bg: #f8f9fa;  // Example light inline code background color
+$light-toc-bg: #f8f9fa;        // Example light Table of Contents background color
+
+// Light mode mixin
+@mixin light-mode {
+  body {
+    color: $light-text-base-color;
+    background-color: $light-white;
+  }
+
+  // Headings
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: black;
+  }
+
+  // Table
+  table {
+    thead {
+      color: $light-gray;
+      border-color: $light-smoke;
+    }
+
+    th,
+    td,
+    tr {
+      border-color: $light-smoke;
+    }
+  }
+
+  // Post
+  .page-content {
+    a {
+      color: $light-link-blue;
+
+      &:hover,
+      &:active,
+      &:focus {
+        color: $light-link-blue-active;
+      }
+    }
+
+    h3 {
+      border-color: $light-smoke;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      .anchor-head {
+        color: $light-link-blue;
+      }
+    }
+  }
+
+  // ToC
+  .toc {
+    background-color: $light-toc-bg;
+  }
+
+  // Go to top
+  #totop {
+    color: $light-text-base-color;
+    background-color: $light-go-top-bg;
+
+    &:hover {
+      background-color: $light-go-top-bg-hover;
+    }
+  }
+
+  // Inline code
+  li>code,
+  p>code {
+    font-size: 0.9em;
+    padding: 1px 3px;
+    position: relative;
+    top: -1px;
+    color: $light-inline-code-text;
+    background-color: $light-inline-code-bg;
+    border-radius: 2px;
+    border: 1px solid rgba(128, 128, 128, 0.1);
+  }
+
+  // kbd tag
+  kbd {
+    color: $light-inline-code-text;
+    background-color: $light-inline-code-bg;
+  }
+
+  // horizontal rule
+  hr {
+    border-color: $light-smoke;
+  }
+
+  // Post Meta
+  .post-meta {
+    color: $light-gray;
+
+    time {
+      &::after {
+        background-color: $light-smoke;
+      }
+    }
+
+    span[itemprop="author"] {
+      border-color: $light-smoke;
+    }
+  }
+
+  // Link
+  a {
+    color: inherit;
+    text-decoration-color: $light-smoke;
+
+    &:hover {
+      color: $light-link-blue;
+    }
+
+    &:focus {
+      outline-color: rgba(44, 118, 246, 0.6);
+    }
+  }
+
+  // List
+  li {
+    &:before {
+      color: $light-gray;
+    }
+  }
+
+  // Blockquote
+  blockquote {
+    color: $light-blockquote-text;
+    border-color: $light-bloquote-border;
+  }
+
+  // Strong, Bold
+  strong,
+  b {
+    color: $light-gray;
+  }
+
+  // Navbar
+  .navbar {
+    border-color: $light-smoke;
+
+    .menu {
+      a#mode {
+        .mode-sunny {
+          display: none;
+        }
+
+        .mode-moon {
+          display: block;
+        }
+      }
+
+      .menu-link {
+        color: $dark-smoke;
+      }
+
+      @include media-query($on-mobile) {
+        background-color: $light-white;
+        border-color: $light-smoke;
+
+        input[type="checkbox"]:checked~.trigger {
+          background: $light-white;
+        }
+      }
+    }
+  }
+
+  // Post Item
+  .post-item {
+    &:not(:first-child) {
+      border-color: $light-smoke;
+    }
+
+    .post-item-date {
+      color: $light-gray;
+    }
+
+    .post-item-title {
+      a {
+        color: $light-text-base-color;
+
+        &:hover,
+        &focus {
+          color: $light-gray;
+        }
+      }
+    }
+  }
+
+  // Post Navigation
+  .post-nav {
+    border-color: $light-smoke;
+
+    .post-nav-item {
+      font-weight: $bold-weight;
+
+      .post-title {
+        color: $light-gray;
+        opacity: 0.9;
+      }
+
+      &:hover,
+      &:focus {
+        .post-title {
+          color: $light-link-blue-active;
+        }
+      }
+
+      .nav-arrow {
+        color: $light-gray;
+      }
+    }
+
+    @include media-query($on-mobile) {
+      .post-nav-item:nth-child(even) {
+        border-color: $light-smoke;
+      }
+    }
+  }
+
+  // Footer
+  .footer {
+    span.footer_item {
+      color: $light-gray;
+    }
+
+    a.footer_item:not(:last-child) {
+      color: $light-gray;
+    }
+
+    .footer_copyright {
+      color: $light-gray;
+      opacity: 1;
+    }
+  }
+
+  // 404 Page
+  .not-found {
+    .title {
+      color: $light-gray;
+      text-shadow: 1px 0px 0px $light-link-blue;
+    }
+
+    .phrase {
+      color: $light-text-base-color;
+    }
+
+    .solution {
+      color: $light-link-blue;
+    }
+
+    .solution:hover {
+      color: $light-link-blue-active;
+    }
+  }
+
+  .search-article {
+    input[type="search"] {
+      color: $light-text-base-color;
+
+      &::-webkit-input-placeholder {
+        color: rgba(128, 128, 128, 0.8);
+      }
+    }
+  }
+}
+
+// Apply light mode by default
+html.light {
+  @include light-mode();
+}
+
+// Support JS disabled environment with media query
+@media (prefers-color-scheme: light) {
+  // Use "dark" class to avoid style conflicts in JS-enabled environment
+  html:not(.dark) {
+    @include light-mode();
+  }
+}
