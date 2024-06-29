@@ -24,8 +24,7 @@
                 break;
             case THEMES.AUTO:
             default:
-                state = window.matchMedia("(prefers-color-scheme: dark)")
-                    .matches
+                state = window.matchMedia("(prefers-color-scheme: dark)").matches
                     ? THEMES.DARK
                     : THEMES.LIGHT;
                 break;
@@ -41,35 +40,37 @@
             document.documentElement.classList.remove(THEMES.DARK);
             document.documentElement.classList.add(THEMES.LIGHT);
         }
+        updateThemeIcons(state);
     };
 
-    // init theme ASAP, then do the rest.
-    initTheme(getThemeState());
-    requestAnimationFrame(() => body.classList.remove("notransition"))
+    const updateThemeIcons = (theme) => {
+        const sunIcon = document.querySelector('.mode-sunny');
+        const moonIcon = document.querySelector('.mode-moon');
+        if (theme === THEMES.DARK) {
+            sunIcon.style.display = 'inline-block';
+            moonIcon.style.display = 'none';
+        } else {
+            sunIcon.style.display = 'none';
+            moonIcon.style.display = 'inline-block';
+        }
+    };
+
     const toggleTheme = () => {
         const state = getThemeState();
         if (state === THEMES.DARK) {
             localStorage.setItem(LS_THEME_KEY, THEMES.LIGHT);
             initTheme(THEMES.LIGHT);
-        } else if (state === THEMES.LIGHT) {
+        } else {
             localStorage.setItem(LS_THEME_KEY, THEMES.DARK);
             initTheme(THEMES.DARK);
         }
     };
 
     window.addEventListener("DOMContentLoaded", () => {
-        // Theme switch
-        const lamp = document.getElementById("mode");
+        const modeToggle = document.getElementById("mode");
+        modeToggle.addEventListener("click", toggleTheme);
 
-        lamp.addEventListener("click", () => toggleTheme());
-
-        // Blur the content when the menu is open
-        const cbox = document.getElementById("menu-trigger");
-
-        cbox.addEventListener("change", function () {
-            const area = document.querySelector(".wrapper");
-            if (this.checked) return area.classList.add("blurry");
-            area.classList.remove("blurry");
-        });
+        // Initialize theme based on stored or default state
+        initTheme(getThemeState());
     });
 })();
